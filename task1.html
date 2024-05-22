@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .calculator {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            width: 300px;
+        }
+
+        h2 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        input[type="number"],
+        select,
+        button {
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s ease; /* הוספת האנימציה למאפיין transform */
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            color: #333;
+            font-weight: bold;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div class="calculator">
+    <h2>Calculator</h2>
+    <form id="calculatorForm">
+        <label for="number1">First Number:</label>
+        <input type="number" id="number1" name="number1">
+
+        <label for="operation">Choose Operation:</label>
+        <select id="operation" name="operation">
+            <option value="addition">+</option>
+            <option value="subtraction">-</option>
+            <option value="multiplication">*</option>
+            <option value="division">/</option>
+        </select>
+
+        <label for="number2">Second Number:</label>
+        <input type="number" id="number2" name="number2">
+
+        <button type="button" onclick="calculate()" id="calculateBtn">Calculate</button>
+
+        <label for="result">Result:</label>
+        <input type="text" id="result" name="result" readonly>
+    </form>
+</div>
+
+<script>
+    function calculate() {
+        var num1 = parseFloat(document.getElementById('number1').value);
+        var num2 = parseFloat(document.getElementById('number2').value);
+        var operation = document.getElementById('operation').value;
+        var result;
+
+        switch (operation) {
+            case 'addition':
+                result = num1 + num2;
+                break;
+            case 'subtraction':
+                result = num1 - num2;
+                break;
+            case 'multiplication':
+                result = num1 * num2;
+                break;
+            case 'division':
+                if (num2 !== 0) {
+                    result = num1 / num2;
+                } else {
+                    result = "Error";
+                }
+                break;
+            default:
+                result = "Choose Operation";
+        }
+
+        document.getElementById('result').value = result;
+
+        // אנימציה פשוטה לכפתור
+        var button = document.getElementById('calculateBtn');
+        button.style.transform = 'scale(1.1)'; // שינוי גודל
+        setTimeout(function() {
+            button.style.transform = 'scale(1)'; // שינוי חזרה לגודל המקורי
+        }, 200); // זמן האנימציה במילישניות
+    }
+</script>
+</body>
+</html>
